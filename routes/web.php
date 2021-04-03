@@ -19,6 +19,12 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
+Route::resource('empresa','EmpresaController');
+Route::get('empresa/{idEmpresa}/confirmar','EmpresaController@confirmar')->name('empresa.confirmar');
+Route::get('/cancelar2', function(){
+    return redirect()->route('empresa.index')->with('datos','Accion Cancelada');
+})->name('cancelar2');
+
 
 
 
