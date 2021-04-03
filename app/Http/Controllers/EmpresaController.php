@@ -11,12 +11,23 @@ class EmpresaController extends Controller
     const PAGINATION=10;
     public function index(Request $request)
     {
-        $buscarpor=$request->buscarpor;
-        $empresa=Empresa::
-        where('idEmpresa','like','%'.$buscarpor.'%')->
-        where('idUser','=',auth()->user()->id)
-        ->paginate($this::PAGINATION);
-        return view('tablas/empresas/index',compact('empresa','buscarpor'));
+        if(auth()->user()->is_admin==1)
+        {
+            $buscarpor=$request->buscarpor;
+            $empresa=Empresa::
+            where('idEmpresa','like','%'.$buscarpor.'%')
+            ->paginate($this::PAGINATION);
+            return view('tablas/empresas/index',compact('empresa','buscarpor'));
+        }
+        else{
+            $buscarpor=$request->buscarpor;
+            $empresa=Empresa::
+            where('idEmpresa','like','%'.$buscarpor.'%')->
+            where('idUser','=',auth()->user()->id)
+            ->paginate($this::PAGINATION);
+            return view('tablas/empresas/index',compact('empresa','buscarpor'));
+        }
+        
     }
     public function create()
     {
