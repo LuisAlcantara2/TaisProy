@@ -15,13 +15,19 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('dni')->nullable();
             $table->string('email');
+            $table->string('telefono')->nullable();
+            $table->string('direccion')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_admin')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            //dales un php artisan migrate
+            //php artisan db:seed --class=CreateUsersSeeder
         });
     }
 

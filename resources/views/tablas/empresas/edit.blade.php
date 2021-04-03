@@ -38,10 +38,8 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="row">
             <label for="descripcion">Telefono</label>
             <input type="number" class="form-control" id="telefono" name="telefono" value="{{ $empresa->telefono}}">
-            </div>
         </div>
     </div>
     <div class="row">

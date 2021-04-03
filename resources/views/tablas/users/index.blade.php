@@ -1,8 +1,8 @@
 @extends('layouts.plantilla')
 @section('contenido')
 
-<h3>LISTADO DE EMPRESAS</h3>
-<a href="{{route('empresa.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo Registro</a>
+<h3>LISTADO DE USUARIOS</h3>
+<a href="{{route('user.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo Registro</a>
 <nav class="navbar float-right">
     <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Buscar por descrpcion" aria-label="Search" id="buscarpor" name="buscarpor" value={{$buscarpor}} >
@@ -21,23 +21,22 @@
             <thead class="thead-dark">
                 <tr>
                 <th scope="col">Nombre</th>
-                <th scope="col">RUC</th>
-                <th scope="col">Email</th>
+                <th scope="col">DNI</th>
                 <th scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($empresa as $itemempresa)
+                @foreach($user as $itemuser)
                 <tr>
-                <td>{{$itemempresa->nombre}}</td>
-                <td>{{$itemempresa->ruc}}</td>
+                <td>{{$itemuser->nombre}} {{$itemuser->apellido}}</td>
+                <td>{{$itemuser->dni}}</td>
                 <td>
-                    <a href="{{route('empresa.edit',$itemempresa->idEmpresa)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>
-                    <a href="{{route('empresa.confirmar',$itemempresa->idEmpresa)}}" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Eliminar</a>
+                    <a href="{{route('user.edit',$itemuser->id)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>
+                    <a href="{{route('user.confirmar',$itemuser->id)}}" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Eliminar</a>
                 </td>
                 </tr>
                 @endforeach
             </tbody>
             </table>
-    {{$empresa->links()}}            
+    {{$user->links()}}            
 @endsection
