@@ -28,9 +28,16 @@ Route::get('/cancelar1', function(){
 
 Route::resource('empresa','EmpresaController');
 Route::get('empresa/{idEmpresa}/confirmar','EmpresaController@confirmar')->name('empresa.confirmar');
+Route::get('empresa/{idEmpresa}/procesos','EmpresaController@procesos')->name('empresa.procesos');
+Route::get('empresa/{idEmpresa}/createP','EmpresaController@createP')->name('empresa.createP');
 Route::get('/cancelar2', function(){
     return redirect()->route('empresa.index')->with('datos','Accion Cancelada');
 })->name('cancelar2');
+Route::resource('proceso','ProcesoController');
+Route::get('proceso/{idProceso}/confirmar','ProcesoController@confirmar')->name('proceso.confirmar');
+Route::get('/cancelar3', function(){
+    return back()->with('datos','Accion Cancelada');
+})->name('cancelar3');
 
 
 

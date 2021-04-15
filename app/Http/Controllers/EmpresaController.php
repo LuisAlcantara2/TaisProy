@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Empresa;
+use App\Proceso;
 
 class EmpresaController extends Controller
 {
@@ -76,5 +77,18 @@ class EmpresaController extends Controller
         DB::table('empresa')->where('idEmpresa', '=', $id)->delete();
         $empresa->save(); 
         return redirect()->route('empresa.index')->with('datos','Registro Eliminado');
+    }
+    public function procesos($id)
+    {
+        //$buscarpor=$request->buscarpor;
+        $proceso=Proceso::
+        where('idEmpresa','=',$id)->
+        paginate($this::PAGINATION);
+        return view('tablas/procesos/index',compact('id','proceso','buscarpor'));
+    }
+    public function createP($request)
+    {
+        $id=$request;
+        return view('tablas/procesos.create',compact('id'));
     }
 }

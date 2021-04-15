@@ -22,7 +22,6 @@
                 <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">RUC</th>
-                <th scope="col">Email</th>
                 <th scope="col">Opciones</th>
                 </tr>
             </thead>
@@ -32,6 +31,7 @@
                 <td>{{$itemempresa->nombre}}</td>
                 <td>{{$itemempresa->ruc}}</td>
                 <td>
+                    <a href="{{route('empresa.procesos',$itemempresa->idEmpresa)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Procesos</a>
                     <a href="{{route('empresa.edit',$itemempresa->idEmpresa)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>
                     <a href="{{route('empresa.confirmar',$itemempresa->idEmpresa)}}" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Eliminar</a>
                 </td>
