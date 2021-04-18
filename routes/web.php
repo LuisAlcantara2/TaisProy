@@ -35,10 +35,14 @@ Route::get('/cancelar2', function(){
 })->name('cancelar2');
 Route::resource('proceso','ProcesoController');
 Route::get('proceso/{idProceso}/confirmar','ProcesoController@confirmar')->name('proceso.confirmar');
+Route::get('proceso/{idProceso}/createI','ProcesoController@createI')->name('proceso.createI');
+Route::get('proceso/{idProceso}/indicador','ProcesoController@indicador')->name('proceso.indicador');
+Route::resource('indicador','IndicadorController');
+Route::get('indicador/{idIndicador}/confirmar','IndicadorController@confirmar')->name('indicador.confirmar');
+
 Route::get('/cancelar3', function(){
     return back()->with('datos','Accion Cancelada');
 })->name('cancelar3');
-
 
 
 

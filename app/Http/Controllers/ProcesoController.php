@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Proceso;
-
+use App\Indicador;
 use App\Empresa;
 class ProcesoController extends Controller
 {
@@ -63,6 +63,16 @@ class ProcesoController extends Controller
         $proceso->save();
         return redirect()->route('empresa.procesos',$id->idEmpresa)->with('datos','Registro Eliminado');
     }
-    
-
+    public function indicador($id)
+    {
+        $indicador=Indicador::
+        where('idProceso','=',$id)->
+        paginate($this::PAGINATION);
+        return view('tablas/indicadores/index',compact('id','indicador'));
+    }
+    public function createI($request)
+    {
+        $id=$request;
+        return view('tablas/indicadores.create',compact('id'));
+    }
 }

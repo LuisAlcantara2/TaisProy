@@ -113,6 +113,14 @@
                   <p>USUARIOS</p>
                 </a>
               </li>
+              @if(auth()->user()->is_admin==1)
+              <li class="nav-item">
+                <a href="{{route('user.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>AUDITORIA</p>
+                </a>
+              </li>
+              @endif
             </ul>
           </li>
         </ul>

@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('contenido')
 
-<h3>LISTADO DE PROCESOS</h3>
+<h3>LISTADO DE INDICADORES</h3>
 <a href="{{route('proceso.createI',$id)}}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo Registro</a>
 <nav class="navbar float-right">
     <form class="form-inline my-2 my-lg-0">
@@ -27,26 +27,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($proceso as $itemproceso)
+                @foreach($indicador as $itemIndicador)
                 <tr>
-                <td>{{$itemproceso->descripcion}}</td>
-                <td>PROCESO @if($itemproceso->tipo==0) ESTRATEGICO
-                @elseif($itemproceso->tipo==1) PRIMARIO
-                @else DE APOYO
-                @endif
-                </td>
+                <td>{{$itemIndicador->preg1}}</td>
+                
                 <td>
-                    <a href="{{route('proceso.indicador',$itemproceso->idProceso)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Indicadores</a>
-                    <a href="" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Mapa Estrategico</a>
-                    <a href="" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Tablero de comando</a>
-                </td>
-                <td>
-                    <a href="{{route('proceso.edit',$itemproceso->idProceso)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>
-                    <a href="{{route('proceso.confirmar',$itemproceso->idProceso)}}" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Eliminar</a>
+                    <a href="{{route('indicador.edit',$itemIndicador->idIndicador)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>
+                    <a href="{{route('indicador.confirmar',$itemIndicador->idIndicador)}}" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Eliminar</a>
                 </td>
                 </tr>
                 @endforeach
             </tbody>
             </table>
-    {{$proceso->links()}}            
+    {{$indicador->links()}}            
 @endsection
