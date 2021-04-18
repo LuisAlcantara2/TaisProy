@@ -2,7 +2,7 @@
 @section('contenido')
 
 <h3>LISTADO DE PROCESOS</h3>
-<a href="{{route('proceso.createI',$id)}}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo Registro</a>
+<a href="{{route('empresa.createP',$id)}}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo Registro</a>
 <nav class="navbar float-right">
     <form class="form-inline my-2 my-lg-0">
         
