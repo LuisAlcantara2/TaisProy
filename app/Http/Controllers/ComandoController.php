@@ -30,7 +30,7 @@ class ComandoController extends Controller
             $comando->frecuencia=$request->fre;
             $comando->lineaBase=$request->base;
             $comando->meta=$request->meta;
-            $comando->save(); 
+            //$comando->save(); 
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -38,6 +38,7 @@ class ComandoController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $comando->save(); 
             $auditoria->save();
             return redirect()->route('proceso.indicador',$var2->idProceso)->with('datos','Registro Actualizado');
         }

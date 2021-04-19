@@ -61,7 +61,7 @@ class EmpresaController extends Controller
             $empresa->telefono=$request->telefono;
             $empresa->correo=$request->correo;
             $empresa->idUser=auth()->user()->id;
-            $empresa->save();
+            //$empresa->save();
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -69,6 +69,7 @@ class EmpresaController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $empresa->save();
             $auditoria->save();
     
             return redirect()->route('empresa.index')->with('datos','Registro Nuevo Guardado!!');
@@ -100,7 +101,7 @@ class EmpresaController extends Controller
             $empresa->domicilio=$request->domicilio;
             $empresa->telefono=$request->telefono;
             $empresa->correo=$request->correo;
-            $empresa->save(); 
+            //$empresa->save(); 
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -109,6 +110,7 @@ class EmpresaController extends Controller
             
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $empresa->save(); 
             $auditoria->save();
             return redirect()->route('empresa.index')->with('datos','Registro Actualizado');
         }
@@ -132,7 +134,7 @@ class EmpresaController extends Controller
         {
             $empresa=Empresa::findOrFail($id);
             DB::table('empresa')->where('idEmpresa', '=', $id)->delete();
-            $empresa->save(); 
+            //$empresa->save(); 
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -141,6 +143,7 @@ class EmpresaController extends Controller
             
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $empresa->save(); 
             $auditoria->save();
             return redirect()->route('empresa.index')->with('datos','Registro Eliminado');
         }

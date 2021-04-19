@@ -46,7 +46,7 @@ class ProcesoController extends Controller
             $proceso->descripcion=$request->descripcion;
             $proceso->tipo=$request->tipo;
             $proceso->idEmpresa=$request->idEmpresa;
-            $proceso->save();
+            //$proceso->save();
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -54,6 +54,7 @@ class ProcesoController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $proceso->save();
             $auditoria->save();
             
             $id=$request->idEmpresa;
@@ -84,7 +85,7 @@ class ProcesoController extends Controller
             $proceso=Proceso::findOrFail($id);
             $proceso->descripcion=$request->descripcion;
             $proceso->tipo=$request->tipo;
-            $proceso->save(); 
+            //$proceso->save(); 
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -92,6 +93,7 @@ class ProcesoController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $proceso->save(); 
             $auditoria->save();
             return redirect()->route('empresa.procesos',$var->idEmpresa)->with('datos','Registro Actualizado');
         }
@@ -118,7 +120,7 @@ class ProcesoController extends Controller
             where('idProceso','=',$idP)->first();
             $proceso=Proceso::findOrFail($idP);
             DB::table('procesos')->where('idProceso', '=', $idP)->delete();
-            $proceso->save();
+            //$proceso->save();
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -126,6 +128,7 @@ class ProcesoController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $proceso->save();
             $auditoria->save();
             return redirect()->route('empresa.procesos',$id->idEmpresa)->with('datos','Registro Eliminado');
         }

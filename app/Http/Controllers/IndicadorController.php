@@ -23,7 +23,7 @@ class IndicadorController extends Controller
             $indicador->preg5=$request->preg5;
             $indicador->formula=$request->formula;
             $indicador->idProceso=$request->idProceso;
-            $indicador->save();
+            //$indicador->save();
             $id=$request->idProceso;
             $comando=new Comando();
             $comando->objetivo='';
@@ -37,7 +37,7 @@ class IndicadorController extends Controller
             $comando->lineaBase='';
             $comando->meta='';
             $comando->idIndicador=$indicador->idIndicador;
-            $comando->save();
+            //$comando->save();
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -45,6 +45,8 @@ class IndicadorController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $indicador->save();
+            $comando->save();
             $auditoria->save();
 
             return redirect()->route('proceso.indicador',$id)->with('datos','Registro Nuevo Guardado!!');
@@ -78,7 +80,7 @@ class IndicadorController extends Controller
             $indicador->preg4=$request->preg4;
             $indicador->preg5=$request->preg5;
             $indicador->formula=$request->formula;
-            $indicador->save(); 
+            //$indicador->save(); 
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -86,6 +88,7 @@ class IndicadorController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $indicador->save(); 
             $auditoria->save();
             
             return redirect()->route('proceso.indicador',$var->idProceso)->with('datos','Registro Actualizado');
@@ -113,7 +116,7 @@ class IndicadorController extends Controller
             where('idIndicador','=',$idP)->first();
             $indicador=Indicador::findOrFail($idP);
             DB::table('indicador')->where('idIndicador', '=', $idP)->delete();
-            $indicador->save();
+            //$indicador->save();
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -121,6 +124,7 @@ class IndicadorController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $indicador->save();
             $auditoria->save();
     
             return redirect()->route('proceso.indicador',$id->idProceso)->with('datos','Registro Eliminado');

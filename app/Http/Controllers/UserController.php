@@ -49,7 +49,7 @@ class UserController extends Controller
             $user->telefono=$request->telefono;
             $user->password=Hash::make($request->contraseña);
             $user->is_admin=$request->is_admin;
-            $user->save();
+            //$user->save();
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -57,6 +57,7 @@ class UserController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $user->save();
             $auditoria->save();
             return redirect()->route('user.index')->with('datos','Registro Nuevo Guardado!!');
         }
@@ -87,7 +88,7 @@ class UserController extends Controller
             $user->email=$request->correo;
             $user->direccion=$request->domicilio;
             $user->telefono=$request->telefono;
-            $user->save(); 
+            //$user->save(); 
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -95,6 +96,7 @@ class UserController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $user->save();
             $auditoria->save();
             return redirect()->route('user.index')->with('datos','Registro Actualizado');
         }
@@ -119,7 +121,7 @@ class UserController extends Controller
         {
             $user=User::findOrFail($id);
             DB::table('user')->where('id', '=', $id)->delete();
-            $user->save(); 
+            //$user->save(); 
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
             $auditoria->email=auth()->user()->email;
@@ -127,6 +129,7 @@ class UserController extends Controller
             $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
             $date = $dt->format('d-m-Y H:i');
             $auditoria->fecha=$date;
+            $user->save(); 
             $auditoria->save();
             return redirect()->route('user.index')->with('datos','Registro Eliminado');
         }
