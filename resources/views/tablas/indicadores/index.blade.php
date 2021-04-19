@@ -29,8 +29,8 @@
                 <td>{{$itemIndicador->preg1}}</td>
                 <td>{{$itemIndicador->preg2}}</td>
                 <td>
-                    <a href="{{route('indicador.comando',$itemIndicador->idIndicador)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Registrar</a>
-                    <a href="{{route('indicador.tablero',$itemIndicador->idIndicador)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Ver tablero</a>
+                    <a href="{{route('indicador.comando',$itemIndicador->idIndicador)}}" class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i>Registrar</a>
+                    <a href="{{route('indicador.tablero',$itemIndicador->idIndicador)}}" class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i>Ver tablero</a>
                 </td>
                 <td>
                     <a href="{{route('indicador.edit',$itemIndicador->idIndicador)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>

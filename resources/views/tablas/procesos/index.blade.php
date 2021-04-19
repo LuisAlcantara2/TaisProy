@@ -33,8 +33,8 @@
                 @endif
                 </td>
                 <td>
-                    <a href="{{route('proceso.indicador',$itemproceso->idProceso)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Indicadores</a>
-                    <a href="{{route('proceso.estrategia',$itemproceso->idProceso)}}" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Mapa Estrategico</a>
+                    <a href="{{route('proceso.indicador',$itemproceso->idProceso)}}" class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i>Indicadores</a>
+                    <a href="{{route('proceso.estrategia',$itemproceso->idProceso)}}" class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i>Mapa Estrategico</a>
                 </td>
                 <td>
                     <a href="{{route('proceso.edit',$itemproceso->idProceso)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>

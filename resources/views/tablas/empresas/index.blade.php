@@ -28,7 +28,7 @@
                 <td>{{$itemempresa->nombre}}</td>
                 <td>{{$itemempresa->ruc}}</td>
                 <td>
-                    <a href="{{route('empresa.procesos',$itemempresa->idEmpresa)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Procesos</a>
+                    <a href="{{route('empresa.procesos',$itemempresa->idEmpresa)}}" class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i>Procesos</a>
                 </td>
                 <td>
                     <a href="{{route('empresa.edit',$itemempresa->idEmpresa)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>
