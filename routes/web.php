@@ -39,6 +39,10 @@ Route::get('proceso/{idProceso}/createI','ProcesoController@createI')->name('pro
 Route::get('proceso/{idProceso}/indicador','ProcesoController@indicador')->name('proceso.indicador');
 Route::resource('indicador','IndicadorController');
 Route::get('indicador/{idIndicador}/confirmar','IndicadorController@confirmar')->name('indicador.confirmar');
+Route::get('indicador/{idIndicador}/comando','IndicadorController@comando')->name('indicador.comando');
+Route::get('indicador/{idIndicador}/tablero','IndicadorController@tablero')->name('indicador.tablero');
+
+Route::resource('comando','ComandoController');
 
 Route::get('/cancelar3', function(){
     return back()->with('datos','Accion Cancelada');

@@ -4,10 +4,6 @@
 <h3>LISTADO DE INDICADORES</h3>
 <a href="{{route('proceso.createI',$id)}}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo Registro</a>
 <nav class="navbar float-right">
-    <form class="form-inline my-2 my-lg-0">
-        
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
 </nav>
 @if(session('datos'))
 <div class="alert alert-warning alert-dismissile fade show mt-3" role="alert">
@@ -21,8 +17,8 @@
             <thead class="thead-dark">
                 <tr>
                 <th scope="col">Descripcion</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Ver</th>
+                <th scope="col">Responsable</th>
+                <th scope="col">Tabla de comandos</th>
                 <th scope="col">Opciones</th>
                 </tr>
             </thead>
@@ -30,7 +26,11 @@
                 @foreach($indicador as $itemIndicador)
                 <tr>
                 <td>{{$itemIndicador->preg1}}</td>
-                
+                <td>{{$itemIndicador->preg2}}</td>
+                <td>
+                    <a href="{{route('indicador.comando',$itemIndicador->idIndicador)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Registrar</a>
+                    <a href="{{route('indicador.tablero',$itemIndicador->idIndicador)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Ver tablero</a>
+                </td>
                 <td>
                     <a href="{{route('indicador.edit',$itemIndicador->idIndicador)}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Editar</a>
                     <a href="{{route('indicador.confirmar',$itemIndicador->idIndicador)}}" class="btn btn-danger btn-sm"><i class="fas fa-edit"></i>Eliminar</a>
