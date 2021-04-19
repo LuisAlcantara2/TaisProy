@@ -39,6 +39,7 @@ Route::get('proceso/{idProceso}/createI','ProcesoController@createI')->name('pro
 Route::get('proceso/{idProceso}/indicador','ProcesoController@indicador')->name('proceso.indicador');
 Route::get('proceso/{idProceso}/createE','ProcesoController@createE')->name('proceso.createE');
 Route::get('proceso/{idProceso}/estrategia','ProcesoController@estrategia')->name('proceso.estrategia');
+Route::get('proceso/{idProceso}/mapa','ProcesoController@mapa')->name('proceso.mapa');
 Route::resource('indicador','IndicadorController');
 Route::get('indicador/{idIndicador}/confirmar','IndicadorController@confirmar')->name('indicador.confirmar');
 Route::get('indicador/{idIndicador}/comando','IndicadorController@comando')->name('indicador.comando');

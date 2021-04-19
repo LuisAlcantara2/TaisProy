@@ -18,13 +18,7 @@ class EstrategiaController extends Controller
             $estrategia=new estrategia();
             $estrategia->descripcion=$request->descripcion;
             $estrategia->tipo=$request->tipo;
-            
-            if($request->relaciones==null){
-                $estrategia->idRelaciones="";
-            }
-            else{
-                $estrategia->idRelaciones=$request->relaciones;
-            }
+            $estrategia->idRelaciones="X";
             $estrategia->idProceso=$request->idProceso;
             //$estrategia->save();
             $id=$request->idProceso;
@@ -51,7 +45,7 @@ class EstrategiaController extends Controller
         if(Auth::check())
         {
             $estrategia=estrategia::findOrFail($id);
-            return view('tablas/estrategiaes.edit',compact('estrategia'));
+            return view('tablas/estrategias.edit',compact('estrategia'));
         }
 
         return view('/auth/login')->with('datos','Inicie sesión porfavor');
@@ -65,11 +59,7 @@ class EstrategiaController extends Controller
             where('idestrategia','=',$id)->first();
             $estrategia=estrategia::findOrFail($id);
             $estrategia->descripcion=$request->descripcion;
-            $estrategia->preg2=$request->preg2;
-            $estrategia->preg3=$request->preg3;
-            $estrategia->preg4=$request->preg4;
-            $estrategia->preg5=$request->preg5;
-            $estrategia->formula=$request->formula;
+            $estrategia->tipo=$request->tipo;
             //$estrategia->save(); 
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
@@ -92,7 +82,7 @@ class EstrategiaController extends Controller
         if(Auth::check())
         {
             $estrategia=estrategia::findOrFail($id);
-            return view('tablas/estrategiaes.confirmar',compact('estrategia'));
+            return view('tablas/estrategias.confirmar',compact('estrategia'));
         }
 
         return view('/auth/login')->with('datos','Inicie sesión porfavor');
@@ -105,7 +95,7 @@ class EstrategiaController extends Controller
             $id=estrategia::select('idProceso')->
             where('idestrategia','=',$idP)->first();
             $estrategia=estrategia::findOrFail($idP);
-            DB::table('estrategia')->where('idestrategia', '=', $idP)->delete();
+            DB::table('estrategia')->where('idEstrategia', '=', $idP)->delete();
             //$estrategia->save();
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;

@@ -18,20 +18,10 @@
                 <option value="0">FINANCIERA</option>
                 <option value="1">CLIENTES</option>
                 <option value="2">PROCESO DE NEGOCIO</option>
-                <option value="2">APRENDIZAJE Y CONOCIMIENTO</option>
+                <option value="3">APRENDIZAJE Y CONOCIMIENTO</option>
             </select>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <label for="descripcion">Relaciones</label>
-            <select class="form-control" size="3" multiple aria-label="multiple select example" name="relaciones" id="relaciones">
-                @foreach($estrategia as $itemestrategia)
-                    <option value="{{$itemestrategia->idEstrategia}}">{{$itemestrategia->descripcion}}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
+    </div>  
     <input hidden="true" type="text" class="form-control" id="idProceso" name="idProceso" value={{$id}}>
   </div>
   <button type="submit" class="btn btn-primary">Grabar</button>

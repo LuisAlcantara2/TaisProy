@@ -183,8 +183,20 @@ class ProcesoController extends Controller
         {
             $id=$request;
             $estrategia=Estrategia::
-            where('idProceso','=',$id);
+            where('idProceso','=',$id)->get();
             return view('tablas/estrategias.create',compact('id','estrategia'));    
+        }
+
+        return view('/auth/login')->with('datos','Inicie sesión porfavor');
+    }
+    public function mapa($request)
+    {
+        if(Auth::check())
+        {
+            $id=$request;
+            $estrategia=Estrategia::
+            where('idProceso','=',$id)->get();
+            return view('tablas/estrategias.mapa',compact('id','estrategia'));    
         }
 
         return view('/auth/login')->with('datos','Inicie sesión porfavor');
