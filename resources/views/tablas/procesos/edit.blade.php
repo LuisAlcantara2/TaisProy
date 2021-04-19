@@ -15,12 +15,16 @@
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Tipo</label>
-            <input type="text" class="form-control" id="tipo" name="tipo" value="{{ $proceso->tipo}}">
+            <select class="form-control" name="tipo" id="tipo">
+                <option {{$proceso->tipo == 0  ? 'selected' : ''}} value="0">PROCESO ESTRATEGICO</option>
+                <option {{$proceso->tipo == 1  ? 'selected' : ''}} value="1">PROCESO PRIMARIO</option>
+                <option {{$proceso->tipo == 2  ? 'selected' : ''}} value="2">PROCESO DE APOYO</option>
+            </select>
         </div>
     </div>
     
   </div>
   <button type="submit" class="btn btn-primary">Grabar</button>
-  <a href="{{route('cancelar3')}}" class="btn btn-danger"><i class="fas fa-ban"></i>Cancelar</a>
+  <a href="{{route('empresa.procesos',$proceso->idEmpresa)}}" class="btn btn-danger"><i class="fas fa-ban"></i>Cancelar</a>
 </form> 
 @endsection

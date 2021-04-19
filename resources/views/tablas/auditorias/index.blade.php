@@ -9,7 +9,6 @@
         <th scope="col">Correo</th>
         <th scope="col">Movimiento</th>
         <th scope="col">Fecha</th>
-        <th scope="col">Hora</th>
         </tr>
     </thead>
     <tbody>
