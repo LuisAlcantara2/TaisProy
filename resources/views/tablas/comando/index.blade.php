@@ -9,13 +9,13 @@
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Objetivo</label>
-            <input type="text" class="form-control" id="obj" name="obj" placeholder="Ingrese respuesta">
+            <input type="text" class="form-control" id="obj" name="obj" value="{{$comando->objetivo}}">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Iniciativa</label>
-            <input type="text" class="form-control" id="ini" name="ini" placeholder="Ingrese respuesta">
+            <input type="text" class="form-control" id="ini" name="ini" value="{{$comando->iniciativas}}">
         </div>
     </div>
     <div class="row">
@@ -27,37 +27,37 @@
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Meta</label>
-            <input type="text" class="form-control" id="meta" name="meta" placeholder="Ingrese respuesta">
+            <input type="text" class="form-control" id="meta" name="meta" value="{{$comando->meta}}">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Responsable</label>
-            <input type="text" class="form-control" id="resp" name="resp" placeholder="Ingrese respuesta">
+            <input type="text" class="form-control" id="resp" name="resp" value="{{$comando->responsable}}">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Frecuencia</label>
-            <input type="text" class="form-control" id="fre" name="fre" placeholder="Ingrese formula">
+            <input type="text" class="form-control" id="fre" name="fre" value="{{$comando->frecuencia}}">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Linea Base</label>
-            <input type="text" class="form-control" id="base" name="base" placeholder="Ingrese formula">
+            <input type="text" class="form-control" id="base" name="base" value="{{$comando->lineaBase}}">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Condicion Aceptable</label>
-            <input type="text" class="form-control" id="cap" name="cap" placeholder="Ingrese formula">
+            <input type="text" class="form-control" id="cap" name="cap" value="{{$comando->condicionVerde}}">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Condicion Mala</label>
-            <input type="text" class="form-control" id="cma" name="cma" placeholder="Ingrese formula">
+            <input type="text" class="form-control" id="cma" name="cma" value="{{$comando->condicionRoja}}">
         </div>
     </div>
     <input type="hidden" class="form-control" id="cam" name="cam" value="cap">

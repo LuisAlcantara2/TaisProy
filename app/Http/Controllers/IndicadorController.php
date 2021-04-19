@@ -78,6 +78,7 @@ class IndicadorController extends Controller
     public function tablero($id)
     {
         $indicador=Indicador::findOrFail($id);
-        return view('tablas/comando.tablero',compact('indicador'));
+        $comando=Comando::where('idIndicador','=',$id)->first();
+        return view('tablas/comando.tablero',compact('comando','indicador'));
     }
 }
