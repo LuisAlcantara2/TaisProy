@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-12">
             <label for="descripcion">Indicador </label>
-            <input readonly type="text" class="form-control" id="3" name="3" value={{$indicador->preg1}}>
+            <input readonly type="text" class="form-control" id="3" name="3" value="{{$indicador->preg1}}">
         </div>
     </div>
     <div class="row">
