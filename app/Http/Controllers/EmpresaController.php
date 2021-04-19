@@ -50,22 +50,12 @@ class EmpresaController extends Controller
         $auditoria=new Auditoria();
         $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
         $auditoria->email=auth()->user()->email;
-        $auditoria->movimiento='CREO EMPRESA'. ' ' .$request->nombre. ' ' .'CON RUC'. ' ' .$request->ruc;
-        
-
+        $auditoria->movimiento='CREÓ EMPRESA'. ' ' .$request->nombre. ' ' .'CON RUC'. ' ' .$request->ruc;
         $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
-        $toDay = $dt->format('d');
-        $toMonth = $dt->format('m');
-        $toYear = $dt->format('Y');
-        $dateUTC = Carbon::createFromDate($toYear, $toMonth, $toDay, 'UTC');
-        $datePST = Carbon::createFromDate($toYear, $toMonth, $toDay, 'America/Lima');
-        $difference = $dateUTC->diffInHours($datePST);
-        //$date = $dt->addHours($difference);
-        $date = Carbon::now()->format('d-m-Y H:i');
-        $date = $dt->addHours($difference);
         $date = $dt->format('d-m-Y H:i');
         $auditoria->fecha=$date;
         $auditoria->save();
+
         return redirect()->route('empresa.index')->with('datos','Registro Nuevo Guardado!!');
     }
     public function edit($id)
@@ -84,6 +74,15 @@ class EmpresaController extends Controller
         $empresa->telefono=$request->telefono;
         $empresa->correo=$request->correo;
         $empresa->save(); 
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='EDITÓ EMPRESA'. ' ' .$request->nombre. ' ' .'CON RUC'. ' ' .$request->ruc;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('empresa.index')->with('datos','Registro Actualizado');
     }
     public function confirmar($id)
@@ -91,11 +90,20 @@ class EmpresaController extends Controller
         $empresa=Empresa::findOrFail($id);
         return view('tablas/empresas.confirmar',compact('empresa'));
     }
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $empresa=Empresa::findOrFail($id);
         DB::table('empresa')->where('idEmpresa', '=', $id)->delete();
         $empresa->save(); 
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='ELIMINÓ EMPRESA'. ' ' .$empresa->nombre. ' ' .'CON RUC'. ' ' .$empresa->ruc;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('empresa.index')->with('datos','Registro Eliminado');
     }
     public function procesos($id)

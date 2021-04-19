@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use DB;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Auditoria;
+use Carbon\Carbon;
+
 
 class UserController extends Controller
 {
@@ -33,6 +36,14 @@ class UserController extends Controller
         $user->password=Hash::make($request->contraseña);
         $user->is_admin=$request->is_admin;
         $user->save();
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='CREÓ USUARIO'. ' ' .$request->nombre. ' ' .$request->apellido. ' ' .'CON DNI'. ' ' .$request->dni;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('user.index')->with('datos','Registro Nuevo Guardado!!');
     }
     public function edit($id)
@@ -51,6 +62,14 @@ class UserController extends Controller
         $user->direccion=$request->domicilio;
         $user->telefono=$request->telefono;
         $user->save(); 
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='EDITÓ USUARIO'. ' ' .$request->nombre. ' ' .$request->apellido. ' ' .'CON DNI'. ' ' .$request->dni;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('user.index')->with('datos','Registro Actualizado');
     }
     public function confirmar($id)
@@ -58,11 +77,19 @@ class UserController extends Controller
         $user=User::findOrFail($id);
         return view('tablas/users.confirmar',compact('user'));
     }
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $user=User::findOrFail($id);
         DB::table('user')->where('id', '=', $id)->delete();
         $user->save(); 
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='ELIMINÓ USUARIO'. ' ' .$user->nombre. ' ' .$user->apellido. ' ' .'CON DNI'. ' ' .$user->dni;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('user.index')->with('datos','Registro Eliminado');
     }
 }

@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Comando;
 use App\Indicador;
 use DB;
+use App\Auditoria;
+use Carbon\Carbon;
 class ComandoController extends Controller
 {
     public function update(Request $request, $id)
     {
         $var=Comando::select('idIndicador')->
         where('idComando','=',$id)->first();
-        $var2=Indicador::select('idProceso')->
+        $var2=Indicador::select('idProceso','preg1')->
         where('idIndicador','=',$var->idIndicador)->first();
         $conama="hola";
         $comando=Comando::findOrFail($id);
@@ -26,6 +28,14 @@ class ComandoController extends Controller
         $comando->lineaBase=$request->base;
         $comando->meta=$request->meta;
         $comando->save(); 
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='ACTUALIZÓ TABLERO DE INDICADOR'. ' ' .$var2->preg1;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('proceso.indicador',$var2->idProceso)->with('datos','Registro Actualizado');
     }
 }

@@ -7,6 +7,8 @@ use DB;
 use App\Proceso;
 use App\Indicador;
 use App\Empresa;
+use App\Auditoria;
+use Carbon\Carbon;
 class ProcesoController extends Controller
 {
     const PAGINATION=10;
@@ -30,6 +32,15 @@ class ProcesoController extends Controller
         $proceso->tipo=$request->tipo;
         $proceso->idEmpresa=$request->idEmpresa;
         $proceso->save();
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='CREÓ PROCESO'. ' ' .$request->descripcion;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
+        
         $id=$request->idEmpresa;
         return redirect()->route('empresa.procesos',$id)->with('datos','Registro Nuevo Guardado!!');
         //{{route('empresa.procesos',$itemempresa->idEmpresa)}}
@@ -47,6 +58,14 @@ class ProcesoController extends Controller
         $proceso->descripcion=$request->descripcion;
         $proceso->tipo=$request->tipo;
         $proceso->save(); 
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='EDITÓ PROCESO'. ' ' .$request->descripcion;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('empresa.procesos',$var->idEmpresa)->with('datos','Registro Actualizado');
     }
     public function confirmar($id)
@@ -54,13 +73,21 @@ class ProcesoController extends Controller
         $proceso=Proceso::findOrFail($id);
         return view('tablas/procesos.confirmar',compact('proceso'));
     }
-    public function destroy($idP)
+    public function destroy(Request $request,$idP)
     {
         $id=Proceso::select('idEmpresa')->
         where('idProceso','=',$idP)->first();
         $proceso=Proceso::findOrFail($idP);
         DB::table('procesos')->where('idProceso', '=', $idP)->delete();
         $proceso->save();
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='ELIMINÓ PROCESO'. ' ' .$proceso->descripcion;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('empresa.procesos',$id->idEmpresa)->with('datos','Registro Eliminado');
     }
     public function indicador($id)

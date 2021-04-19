@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Indicador;
 use App\Comando;
 use DB;
+use App\Auditoria;
+use Carbon\Carbon;
 class IndicadorController extends Controller
 {
     public function store(Request $request)
@@ -33,6 +35,15 @@ class IndicadorController extends Controller
         $comando->meta='';
         $comando->idIndicador=$indicador->idIndicador;
         $comando->save();
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='CREÓ INDICADOR '. ' ' .$request->preg1;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
+
         return redirect()->route('proceso.indicador',$id)->with('datos','Registro Nuevo Guardado!!');
         //{{route('empresa.indicadors',$itemempresa->idEmpresa)}}
     }
@@ -53,6 +64,15 @@ class IndicadorController extends Controller
         $indicador->preg5=$request->preg5;
         $indicador->formula=$request->formula;
         $indicador->save(); 
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='EDITÓ INDICADOR'. ' ' .$request->preg1;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
+        
         return redirect()->route('proceso.indicador',$var->idProceso)->with('datos','Registro Actualizado');
     }
     public function confirmar($id)
@@ -60,13 +80,22 @@ class IndicadorController extends Controller
         $indicador=Indicador::findOrFail($id);
         return view('tablas/indicadores.confirmar',compact('indicador'));
     }
-    public function destroy($idP)
+    public function destroy(Request $request, $idP)
     {
         $id=Indicador::select('idProceso')->
         where('idIndicador','=',$idP)->first();
         $indicador=Indicador::findOrFail($idP);
         DB::table('indicador')->where('idIndicador', '=', $idP)->delete();
         $indicador->save();
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='ELIMINÓ INDICADOR'. ' ' .$indicador->preg1;
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
+
         return redirect()->route('proceso.indicador',$id->idProceso)->with('datos','Registro Eliminado');
     }
     public function comando($id)
