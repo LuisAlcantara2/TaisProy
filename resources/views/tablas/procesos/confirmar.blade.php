@@ -23,7 +23,7 @@
                             <i class="fas fa-check-square"></i>
                             Si
                         </button>
-                        <a href="{{route('cancelar3')}}" class="btn btn-sm btn-primary">
+                        <a href="{{route('empresa.procesos',$proceso->idEmpresa)}}" class="btn btn-sm btn-primary">
                             <i class="fas fa-times-circle"></i>
                             NO
                         </a>
