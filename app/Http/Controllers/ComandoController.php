@@ -8,6 +8,7 @@ use App\Indicador;
 use DB;
 use App\Auditoria;
 use Carbon\Carbon;
+use Auth;
 class ComandoController extends Controller
 {
     public function update(Request $request, $id)

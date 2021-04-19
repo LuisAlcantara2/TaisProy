@@ -9,6 +9,7 @@ use App\Indicador;
 use App\Empresa;
 use App\Auditoria;
 use Carbon\Carbon;
+use Auth;
 class ProcesoController extends Controller
 {
     const PAGINATION=10;

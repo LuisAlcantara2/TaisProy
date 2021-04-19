@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Auditoria;
 use Carbon\Carbon;
-
+use Auth;
 
 class UserController extends Controller
 {

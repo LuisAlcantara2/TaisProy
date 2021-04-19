@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Auditoria;
+use Auth;
 class AuditoriaController extends Controller
 {
     const PAGINATION=10;

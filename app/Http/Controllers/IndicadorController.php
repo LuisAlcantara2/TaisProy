@@ -8,6 +8,7 @@ use App\Comando;
 use DB;
 use App\Auditoria;
 use Carbon\Carbon;
+use Auth;
 class IndicadorController extends Controller
 {
     public function store(Request $request)
