@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Indicador extends Model
+class Estrategia extends Model
 {
-    protected $table="indicador";
-    protected $primaryKey="idIndicador";
+    protected $table="estrategia";
+    protected $primaryKey="idEstrategia";
     public $timestamps =false;
     protected $fillable = [
-        'preg1','preg2','preg3','preg4','preg5','formula','idProceso'
+        'descripcion','tipo','idRelaciones','idProceso'
     ];
     public function proceso()
     {

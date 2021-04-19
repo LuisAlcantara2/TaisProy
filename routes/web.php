@@ -37,11 +37,14 @@ Route::resource('proceso','ProcesoController');
 Route::get('proceso/{idProceso}/confirmar','ProcesoController@confirmar')->name('proceso.confirmar');
 Route::get('proceso/{idProceso}/createI','ProcesoController@createI')->name('proceso.createI');
 Route::get('proceso/{idProceso}/indicador','ProcesoController@indicador')->name('proceso.indicador');
+Route::get('proceso/{idProceso}/createE','ProcesoController@createE')->name('proceso.createE');
+Route::get('proceso/{idProceso}/estrategia','ProcesoController@estrategia')->name('proceso.estrategia');
 Route::resource('indicador','IndicadorController');
 Route::get('indicador/{idIndicador}/confirmar','IndicadorController@confirmar')->name('indicador.confirmar');
 Route::get('indicador/{idIndicador}/comando','IndicadorController@comando')->name('indicador.comando');
 Route::get('indicador/{idIndicador}/tablero','IndicadorController@tablero')->name('indicador.tablero');
-
+Route::resource('estrategia','EstrategiaController');
+Route::get('estrategia/{idEstrategia}/confirmar','EstrategiaController@confirmar')->name('estrategia.confirmar');
 Route::resource('comando','ComandoController');
 Route::resource('auditoria','AuditoriaController');
 

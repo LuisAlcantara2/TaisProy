@@ -12,7 +12,7 @@ class Comando extends Model
     protected $fillable = [
         'objetivo','indicador','condicionVerde','condicionAmarrilla','condicionRoja','iniciativas','responsable','frecuencia','lineaBase','meta','idIndicador'
     ];
-    public function user()
+    public function indicador()
     {
         return $this->hasOne('App\Indicador','idIndicador','idIndicador');
     }   

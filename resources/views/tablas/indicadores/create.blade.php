@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('contenido')
 
-<h1>Registrar Proceso</h1>
+<h1>Registrar Indicador</h1>
 <form method="POST" action="{{route('indicador.store')}}">
     @csrf
   <div class="form-group">

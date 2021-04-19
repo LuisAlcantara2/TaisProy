@@ -8,6 +8,7 @@ use App\Proceso;
 use App\Indicador;
 use App\Empresa;
 use App\Auditoria;
+use App\Estrategia;
 use Carbon\Carbon;
 use Auth;
 class ProcesoController extends Controller
@@ -157,6 +158,33 @@ class ProcesoController extends Controller
         {
             $id=$request;
             return view('tablas/indicadores.create',compact('id'));    
+        }
+
+        return view('/auth/login')->with('datos','Inicie sesión porfavor');
+    }
+    public function estrategia($id)
+    {
+        if(Auth::check())
+        {
+            $estrategia=Estrategia::
+            where('idProceso','=',$id)->
+            paginate($this::PAGINATION);
+            $proceso=Proceso::
+            where('idProceso','=',$id)->first();
+            return view('tablas/estrategias/index',compact('id','estrategia','proceso'));
+        }
+
+        return view('/auth/login')->with('datos','Inicie sesión porfavor');
+        
+    }
+    public function createE($request)
+    {
+        if(Auth::check())
+        {
+            $id=$request;
+            $estrategia=Estrategia::
+            where('idProceso','=',$id);
+            return view('tablas/estrategias.create',compact('id','estrategia'));    
         }
 
         return view('/auth/login')->with('datos','Inicie sesión porfavor');
