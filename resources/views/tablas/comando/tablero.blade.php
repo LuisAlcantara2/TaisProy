@@ -196,7 +196,7 @@
                                 </td>
 
                                 <td>
-                                    <div>
+                                    <div style="width: 50px">
                                         <img src="/images/balance-flecha-rigth.png" alt="">
                                     </div>
                                 </td>
@@ -209,7 +209,7 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <img src="" alt="">
+                                        <img src="/images/balance-flecha-rigth.png" alt="">
                                     </div>
                                 </td>
                                 <td>
@@ -219,8 +219,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="width: 60px">
-
+                                    <div style="width: 50px">
+                                        <img src="/images/balance-flecha-rigth.png" alt="">
                                     </div>
                                 </td>
                                 <td>
