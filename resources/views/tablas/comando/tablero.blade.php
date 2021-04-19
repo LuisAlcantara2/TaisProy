@@ -164,6 +164,7 @@
 </style>
 @endsection
 @section('contenido')
+<a href="{{route('proceso.indicador',$indicador->idProceso)}}" class="btn btn-info"><i class="fas fa-arrow-left"></i> Volver</a>
 <div class="row">
     <div class="col-sm-12">
         <div class="card">

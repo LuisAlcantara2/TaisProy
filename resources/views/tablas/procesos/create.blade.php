@@ -21,7 +21,7 @@
             </select>
         </div>
     </div>
-    <input type="text" class="form-control" id="idEmpresa" name="idEmpresa" value={{$id}}>
+    <input hidden="true" type="text" class="form-control" id="idEmpresa" name="idEmpresa" value={{$id}}>
   </div>
   <button type="submit" class="btn btn-primary">Grabar</button>
   <a href="{{route('empresa.procesos',$id)}}" class="btn btn-danger"><i class="fas fa-ban"></i>Cancelar</a>

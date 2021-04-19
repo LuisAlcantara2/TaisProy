@@ -41,7 +41,7 @@
             <input type="text" class="form-control" id="formula" name="formula" placeholder="Ingrese formula">
         </div>
     </div>
-    <input type="text" class="form-control" id="idProceso" name="idProceso" value={{$id}}>
+    <input hidden="true" type="text" class="form-control" id="idProceso" name="idProceso" value={{$id}}>
   </div>
   <button type="submit" class="btn btn-primary">Grabar</button>
   <a href="{{route('proceso.indicador',$id)}}" class="btn btn-danger"><i class="fas fa-ban"></i>Cancelar</a>

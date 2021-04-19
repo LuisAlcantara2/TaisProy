@@ -2,6 +2,7 @@
 @section('contenido')
 
 <h3>LISTADO DE INDICADORES</h3>
+<a href="{{route('empresa.procesos',$proceso->idEmpresa)}}" class="btn btn-info"><i class="fas fa-arrow-left"></i> Volver</a>
 <a href="{{route('proceso.createI',$id)}}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo Registro</a>
 <nav class="navbar float-right">
 </nav>

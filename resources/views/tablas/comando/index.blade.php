@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('contenido')
 
-<h1>Registrar</h1>
+<a href="{{route('proceso.indicador',$indicador->idProceso)}}" class="btn btn-info"><i class="fas fa-arrow-left"></i> Volver</a> <h1>Registrar</h1>
 <form method="POST" action="{{route('comando.update',$comando->idComando)}}">
     @method('put')
     @csrf

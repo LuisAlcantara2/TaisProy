@@ -1,13 +1,10 @@
 @extends('layouts.plantilla')
 @section('contenido')
-
 <h3>LISTADO DE PROCESOS</h3>
+<a href="{{route('empresa.index')}}" class="btn btn-info"><i class="fas fa-arrow-left"></i> Volver</a>
 <a href="{{route('empresa.createP',$id)}}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo Registro</a>
 <nav class="navbar float-right">
-    <form class="form-inline my-2 my-lg-0">
-        
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
+    
 </nav>
 @if(session('datos'))
 <div class="alert alert-warning alert-dismissile fade show mt-3" role="alert">

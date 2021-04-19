@@ -68,7 +68,9 @@ class ProcesoController extends Controller
         $indicador=Indicador::
         where('idProceso','=',$id)->
         paginate($this::PAGINATION);
-        return view('tablas/indicadores/index',compact('id','indicador'));
+        $proceso=Proceso::
+        where('idProceso','=',$id)->first();
+        return view('tablas/indicadores/index',compact('id','indicador','proceso'));
     }
     public function createI($request)
     {

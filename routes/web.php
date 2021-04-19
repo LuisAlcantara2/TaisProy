@@ -43,6 +43,7 @@ Route::get('indicador/{idIndicador}/comando','IndicadorController@comando')->nam
 Route::get('indicador/{idIndicador}/tablero','IndicadorController@tablero')->name('indicador.tablero');
 
 Route::resource('comando','ComandoController');
+Route::resource('auditoria','AuditoriaController');
 
 Route::get('/cancelar3', function(){
     return back()->with('datos','Accion Cancelada');

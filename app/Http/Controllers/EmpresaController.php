@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\Empresa;
 use App\Proceso;
-
+use App\Auditoria;
+use Carbon\Carbon;
 class EmpresaController extends Controller
 {
     const PAGINATION=10;
@@ -46,6 +47,25 @@ class EmpresaController extends Controller
         $empresa->correo=$request->correo;
         $empresa->idUser=auth()->user()->id;
         $empresa->save();
+        $auditoria=new Auditoria();
+        $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+        $auditoria->email=auth()->user()->email;
+        $auditoria->movimiento='CREO EMPRESA'. ' ' .$request->nombre. ' ' .'CON RUC'. ' ' .$request->ruc;
+        
+
+        $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+        $toDay = $dt->format('d');
+        $toMonth = $dt->format('m');
+        $toYear = $dt->format('Y');
+        $dateUTC = Carbon::createFromDate($toYear, $toMonth, $toDay, 'UTC');
+        $datePST = Carbon::createFromDate($toYear, $toMonth, $toDay, 'America/Lima');
+        $difference = $dateUTC->diffInHours($datePST);
+        //$date = $dt->addHours($difference);
+        $date = Carbon::now()->format('d-m-Y H:i');
+        $date = $dt->addHours($difference);
+        $date = $dt->format('d-m-Y H:i');
+        $auditoria->fecha=$date;
+        $auditoria->save();
         return redirect()->route('empresa.index')->with('datos','Registro Nuevo Guardado!!');
     }
     public function edit($id)
