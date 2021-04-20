@@ -56,7 +56,7 @@ class IndicadorController extends Controller
         
         //{{route('empresa.indicadors',$itemempresa->idEmpresa)}}
     }
-    public function edit($id)
+    public function edit($id)   
     {
         if(Auth::check())
         {
@@ -139,7 +139,6 @@ class IndicadorController extends Controller
         {
             $indicador=Indicador::findOrFail($id);
             $comando=Comando::where('idIndicador','=',$id)->first();
-            dd($comando);
             return view('tablas/comando.index',compact('indicador','comando'));
         }
 
@@ -151,8 +150,7 @@ class IndicadorController extends Controller
         if(Auth::check())
         {
             $indicador=Indicador::findOrFail($id);
-            $comando=Comando::where('idIndicador','=',$id)->get();
-            dd($comando);
+            $comando=Comando::where('idIndicador','=',$id);
             return view('tablas/comando.tablero',compact('comando','indicador'));
         }
 
