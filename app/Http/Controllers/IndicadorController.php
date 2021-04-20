@@ -50,7 +50,7 @@ class IndicadorController extends Controller
             $comando->save();
             $auditoria->save();
 
-            return redirect()->route('proceso.indicador',$request->idProceso)->with('datos','Registro Nuevo Guardado!!');
+            return redirect()->route('proceso.indicador',$id)->with('datos','Registro Nuevo Guardado!!');
         }
 
         return view('/auth/login')->with('datos','Inicie sesión porfavor');
