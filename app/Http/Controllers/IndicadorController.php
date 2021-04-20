@@ -25,6 +25,16 @@ class IndicadorController extends Controller
             $indicador->idProceso=$request->idProceso;
             //$indicador->save();
             $id=$request->idProceso;
+            //$comando->save();
+            $auditoria=new Auditoria();
+            $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
+            $auditoria->email=auth()->user()->email;
+            $auditoria->movimiento='CREÓ INDICADOR '. ' ' .$request->preg1;
+            $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
+            $date = $dt->format('d-m-Y H:i');
+            $auditoria->fecha=$date;
+            $indicador->save();
+            $auditoria->save();
             $idIndi=Indicador::orderBy('idIndicador','desc')->first();
             $comando=new Comando();
             $comando->objetivo='';
@@ -38,18 +48,7 @@ class IndicadorController extends Controller
             $comando->lineaBase='';
             $comando->meta='';
             $comando->idIndicador=$idIndi->idIndicador;
-            //$comando->save();
-            $auditoria=new Auditoria();
-            $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
-            $auditoria->email=auth()->user()->email;
-            $auditoria->movimiento='CREÓ INDICADOR '. ' ' .$request->preg1;
-            $dt = Carbon::parse($request->ShootDateTime)->timezone('America/Lima');
-            $date = $dt->format('d-m-Y H:i');
-            $auditoria->fecha=$date;
-            $indicador->save();
             $comando->save();
-            $auditoria->save();
-
             return redirect()->route('proceso.indicador',$id)->with('datos','Registro Nuevo Guardado!!');
         }
 
@@ -140,6 +139,7 @@ class IndicadorController extends Controller
         {
             $indicador=Indicador::findOrFail($id);
             $comando=Comando::where('idIndicador','=',$id)->first();
+            dd($comando);
             return view('tablas/comando.index',compact('indicador','comando'));
         }
 
@@ -151,7 +151,8 @@ class IndicadorController extends Controller
         if(Auth::check())
         {
             $indicador=Indicador::findOrFail($id);
-            $comando=Comando::where('idIndicador','=',$id)->first();
+            $comando=Comando::where('idIndicador','=',$id)->get();
+            dd($comando);
             return view('tablas/comando.tablero',compact('comando','indicador'));
         }
 
