@@ -150,7 +150,8 @@ class IndicadorController extends Controller
         if(Auth::check())
         {
             $indicador=Indicador::findOrFail($id);
-            $comando=Comando::where('idIndicador','=',$id);
+            $comando=Comando::where('idIndicador','=',$id)->first();
+            
             return view('tablas/comando.tablero',compact('comando','indicador'));
         }
 
