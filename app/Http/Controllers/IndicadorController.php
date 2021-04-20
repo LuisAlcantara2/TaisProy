@@ -25,6 +25,7 @@ class IndicadorController extends Controller
             $indicador->idProceso=$request->idProceso;
             //$indicador->save();
             $id=$request->idProceso;
+            $idIndi=Indicador::orderBy('idIndicador','desc')->first();
             $comando=new Comando();
             $comando->objetivo='';
             $comando->indicador=$request->preg1;
@@ -36,7 +37,7 @@ class IndicadorController extends Controller
             $comando->frecuencia='';
             $comando->lineaBase='';
             $comando->meta='';
-            $comando->idIndicador=$indicador->idIndicador;
+            $comando->idIndicador=$idIndi->idIndicador;
             //$comando->save();
             $auditoria=new Auditoria();
             $auditoria->usuario=auth()->user()->nombre. ' ' .auth()->user()->apellido;
@@ -49,7 +50,7 @@ class IndicadorController extends Controller
             $comando->save();
             $auditoria->save();
 
-            return redirect()->route('proceso.indicador',$id)->with('datos','Registro Nuevo Guardado!!');
+            return redirect()->route('proceso.indicador',$request->idProceso)->with('datos','Registro Nuevo Guardado!!');
         }
 
         return view('/auth/login')->with('datos','Inicie sesión porfavor');
